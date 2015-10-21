@@ -1,0 +1,8 @@
+__pycache__
+virtualenv
+
+analyse_tmp
+gitolite-admin
+
+*.db
+*.pyc
