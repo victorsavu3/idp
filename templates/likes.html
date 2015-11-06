@@ -1,0 +1,13 @@
+<th>
+  <td>Name</td>
+  <td>Likes</td>
+  <td>Dislikes</td>
+</th>
+
+{% for row in data %}
+  <tr>
+    {% for element in row %}
+      <td>element</td>
+    {% endfor %}
+  </tr>
+{% endfor %}
