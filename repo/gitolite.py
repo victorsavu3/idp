@@ -53,7 +53,7 @@ class GitoliteAdminRepo:
     def commit(self, message):
         index = self.repo.index
 
-        index.add('.')
+        self.repo.git.add('.')
 
         author = git.Actor('ILab', 'GitoliteAdminRepo@server')
         index.commit(message, author=author)
