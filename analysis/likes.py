@@ -19,12 +19,12 @@ def analyse(repository, branch, diff, repo, repodir):
 
 def data(repository, branch):
     resultname = os.path.join(app.config['ANALYSIS_DATA_FOLDER'], 'likes', repository, branch)
-    with open(fname, 'r') as result:
-        return result.read()
+    with open(resultname, 'r') as source:
+        return source.read()
 
 def render(repository, branch):
     resultname = os.path.join(app.config['ANALYSIS_DATA_FOLDER'], 'likes', repository, branch)
-    with open(fname, 'r') as result:
+    with open(resultname, 'r') as source:
         sourcereader = csv.reader(source, dialect='excel')
 
-        return render_template('likes', data=sourcereader)
+        return render_template('likes.html', data=sourcereader)
