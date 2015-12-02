@@ -33,13 +33,13 @@ def render(repository, branch):
     form = request.args.get('form')
 
     if form is None:
-        forms = [form for form in os.listdir(os.path.join(repodir, 'form'))]
+        forms = [form for form in os.listdir(os.path.join(app.config['ANALYSIS_DATA_FOLDER'], 'form', repository, branch))]
 
-        return render_template('forms.html', forms=forms)
+        return render_template('forms.html', forms=forms, repository=repository, branch=branch)
     else:
         formresult = os.path.join(app.config['ANALYSIS_DATA_FOLDER'], 'form', repository, branch, form)
 
         with open(formresult, 'r') as source:
             sourcereader = csv.reader(source, dialect='excel')
 
-            return render_template('forms.html', data=sourcereader)
+            return render_template('form.html', data=sourcereader)

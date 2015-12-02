@@ -1,15 +1,32 @@
-from flask import Flask, request
+from flask import Flask, request, Blueprint, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
+import chartkick
 
 app = Flask(__name__)
 
 app.config.from_pyfile('default.cfg')
 app.config.from_envvar('CONFIG_FILE', silent=True)
 
+ck = Blueprint('ck_page', __name__, static_folder=chartkick.js(), static_url_path='/static')
+app.register_blueprint(ck, url_prefix='/ck')
+app.jinja_env.add_extension("chartkick.ext.charts")
+
 db = SQLAlchemy(app)
+
+app.jinja_env.globals.update(max=max)
 
 import entities
 from analyse import analyse
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/repositories')
+def repositories():
+    repositories = entities.Repository.query.all()
+
+    return render_template('repositories.html', repositories=repositories)
 
 @app.route('/analyse')
 def analyse_cb():

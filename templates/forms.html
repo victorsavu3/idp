@@ -1,0 +1,10 @@
+{% extends "main.html" %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+  {% for form in forms %}
+    <a href="{{url_for('analysis.form_render', repository=repository, branch=branch, form=form)}}">{{form}}</a>
+  {% endfor %}
+{% endblock %}

@@ -1,0 +1,25 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="/ck/static/chartkick.js"></script>
+
+{% for row in data %}
+  <h3>{{row[1]}}</h3>
+  {% if row[0] == "scale" %}
+    <svg viewBox="0 0 100 20" width="30%">
+      <!--{% set sum = (row[2]|int + row[3]|int + row[4]|int + row[5]|int + row[6]|int) %}-->
+      {% set sum = max(row[2]|int,row[3]|int,row[4]|int,row[5]|int,row[6]|int) %}
+
+      <circle cx="10" cy="10" r="{{10 * row[2]|int / sum}}" fill="red" />
+      <circle cx="30" cy="10" r="{{10 * row[3]|int / sum}}" fill="red" />
+      <circle cx="50" cy="10" r="{{10 * row[4]|int / sum}}" fill="red" />
+      <circle cx="70" cy="10" r="{{10 * row[5]|int / sum}}" fill="red" />
+      <circle cx="90" cy="10" r="{{10 * row[6]|int / sum}}" fill="red" />
+
+      <!--<text text-anchor="middle" x="50" y="20" fill="black" font-size="20" opacity="0.4">{{row[1]}}</text>-->
+    </svg>
+  {% endif %}
+
+  {% if row[0] == "bar" %}
+    {% bar_chart row[2] %}
+  {% endif %}
+{% endfor %}

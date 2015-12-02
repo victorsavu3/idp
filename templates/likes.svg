@@ -1,0 +1,9 @@
+{% for row in data %}
+  <svg height="10px" width="100px" class="likes">
+    {% set width_likes = 100 * row[1]|int / (row[1]|int + row[2]|int) %}
+
+    <line x1="0" y1="0" x2="{{width_likes}}" y2="0" style="stroke:rgb(0,255,0);stroke-width:20"/>
+    <line x1="{{width_likes}}" y1="0" x2="100" y2="0" style="stroke:rgb(255,0,0);stroke-width:20"/>
+    <text x="0" y="10" fill="black" font-size="10">{{row[0]}}</text>
+  </svg>
+{% endfor %}

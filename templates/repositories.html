@@ -1,0 +1,12 @@
+{% extends "main.html" %}
+
+{% block body %}
+<h1>Courses</h1>
+{% for repository in repositories %}
+  <div>
+    <p>{{repository.name}}</p>
+    <a href="{{url_for('analysis.form_render', repository=repository.name, branch='master')}}">Forms</a>
+    <a href="{{url_for('analysis.likes_render', repository=repository.name, branch='master')}}">Likes</a>
+  </div>
+{% endfor %}
+{% endblock %}
